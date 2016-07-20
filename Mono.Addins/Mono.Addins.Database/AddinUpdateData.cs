@@ -157,7 +157,8 @@ namespace Mono.Addins.Database
 					// type parameter definition, we want to skip this.
 					// Generic types has [[ after generic name and ends with ]].
 					int genericStartIdx = path.IndexOf ("[[", searchIdx);
-					if (genericStartIdx != -1) {
+					int separatorIdx = path.IndexOf (",", searchIdx);
+					if (genericStartIdx != -1 && genericStartIdx < separatorIdx) {
 						typeName = path.Substring (searchIdx, genericStartIdx - searchIdx);
 						searchIdx += path.IndexOf ("]]", searchIdx) + 3;
 					} else {
